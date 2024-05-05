@@ -1,9 +1,17 @@
-import UploadSliptComponent from "@/components/mycomponents/upload_slipt"
+import UploadSliptComponent from "@/components/my/upload_slipt"
+import { supabase } from "@/utils/supabase/client"
+import { Users } from "lucide-react";
+import { notFound } from "next/navigation";
 
+export const revalidate = 0;
+async function UploadSlipt() {
+  const { data:users, error } = await supabase.from('user28').select();
 
-function UploadSlipt() {
+  if (!users) {
+    notFound();
+  }
   return (
-    <div><UploadSliptComponent /></div>
+    <div><UploadSliptComponent users={users} /></div>
   )
 }
 

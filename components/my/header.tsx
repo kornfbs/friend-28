@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { ClipboardPlus, Pencil, Search } from 'lucide-react';
+import { ClipboardPlus, Pencil, Search, ListChecks  } from 'lucide-react';
 import { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import logo from '@/public/images/logov2.png';
@@ -45,7 +45,9 @@ function Header() {
                     <button type='submit' className='flex justify-center items-center bg-white rounded-full h-6 w-6 px-1'><Search className='w-5 h-5' /></button>
                 </form>
                 <button onClick={()=> router.push('/signup')} type='submit' className='flex justify-center items-center bg-white rounded-full h-6 w-6 px-1 mr-3'><Pencil className='w-5 h-5' /></button>
-                <button onClick={()=> router.push('/upload')} type='submit' className='flex justify-center items-center bg-white rounded-full h-6 w-6 px-1'><ClipboardPlus className='w-5 h-5' /></button>
+                <button onClick={()=> router.push('/upload')} type='submit' className='flex justify-center items-center bg-white rounded-full h-6 w-6 px-1 mr-3'><ClipboardPlus className='w-5 h-5' /></button>
+                <button onClick={()=> router.push('/admin/tx/list')} type='submit' className='flex justify-center items-center bg-white rounded-full h-6 w-6 px-1'><ListChecks className='w-5 h-5' /></button>
+
 
             </div>
         </header>

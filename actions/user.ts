@@ -3,7 +3,7 @@
 import { supabase } from "@/utils/supabase/server";
 import { z } from 'zod';
 import { v4 as uuidv4 } from 'uuid';
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 const MAX_FILE_SIZE = 5000000;
@@ -28,8 +28,16 @@ export async function register(prevState: any, formData: FormData) {
 }
 
 export async function updateSlipt(prevState: any, formData: FormData) {
-   
+    console.log(formData.get('code'));
+    console.log(formData.get('transferDate'));
+    console.log(formData.get('amount'));
+    console.log(formData.get('remark'));
+
     const schema = z.object({
+        remark: z.string(),
+        transferDate: z.string({
+            required_error: "Transfer date is required"
+        }),
         code: z.string().optional(),
         amount: z.number().min(0),
         image: z
@@ -44,6 +52,8 @@ export async function updateSlipt(prevState: any, formData: FormData) {
         code: formData.get('code'),
         amount: Number(formData.get('amount')),
         image: formData.get('image'),
+        remark: formData.get('remark'),
+        transferDate: formData.get('transferDate')
     });
 
     if (!validatedFields.success) {
@@ -54,14 +64,14 @@ export async function updateSlipt(prevState: any, formData: FormData) {
             message: 'Missing Fields. Failed to Create Product.',
         };
     }
-    const { code, amount, image } = validatedFields.data;
+    const { code, amount, transferDate, remark, image } = validatedFields.data;
 
     //save image to storage and get image url path
     try {
         const fileExtend = image.name.split('.')[1];
         const fileName = `${uuidv4()}.${fileExtend}`;
         const { data, error } = await supabase.storage
-            .from('slipt28')
+            .from('myupload')
             .upload(fileName, image, {
                 cacheControl: '3600',
                 upsert: false,
@@ -73,7 +83,9 @@ export async function updateSlipt(prevState: any, formData: FormData) {
             const { data, error } = await supabase.from('tx28').insert({
                 code,
                 amount,
+                transfered_at: new Date(transferDate),
                 image: path,
+                remark,
             })
             //const { data, error } = await supabase.rpc('hello_world');
             if (error) {
@@ -93,9 +105,23 @@ export async function updateSlipt(prevState: any, formData: FormData) {
 }
 
 export async function deleteTx(id: number) {
-
-   await supabase.from('tx28').delete().eq('id', id);
-        
-    revalidatePath('/admin/tx/liss');
-
+    await supabase.from('tx28').delete().eq('id', id);
+    redirect('/admin/tx/list');
 }
+
+export async function deleteUser(id: number) {
+    await supabase.from('user28').delete().eq('id', id);
+}
+
+export async function getTx() {
+
+    const tx = await supabase.from('tx').select('*');
+    return tx;
+}
+
+export async function getTx28(id: string) {
+
+    const tx28 = await supabase.from('tx28').select('*').eq('code', id);
+    return tx28;
+}
+

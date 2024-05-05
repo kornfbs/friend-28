@@ -1,4 +1,4 @@
-import SignupComponent from "@/components/mycomponents/signup_component";
+import SignupComponent from "@/components/my/signup_component";
 import {
   Table,
   TableBody,
@@ -9,8 +9,9 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { supabase } from "@/utils/supabase/client";
+import DeleteUser from "@/components/my/delete_user";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function Signup() {
 
@@ -25,16 +26,21 @@ export default async function Signup() {
           <TableHeader>
             <TableRow>
               <TableHead>ลำดับที่</TableHead>
-              <TableHead className="text-left">ชื่อ สกุล</TableHead>
+              <TableHead className="text-left">เลชประจำตัว</TableHead>
+              <TableHead className="text-left flex-1">ชื่อ สกุล</TableHead>
+              <TableHead className="text-left">ลบ</TableHead>
+
             </TableRow>
           </TableHeader>
           <TableBody>
             {rows?.map((row, index) => (
               <TableRow key={row.id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell className="text-left">{row.name}</TableCell>
-              </TableRow>
-            ))}
+                <TableCell className="font-light">{index + 1}</TableCell>
+                <TableCell className="text-left font-light">{row.code}</TableCell>
+                <TableCell className="text-left font-light flex-1">{row.name}</TableCell>
+                <TableCell className="text-left"><DeleteUser id={row.id} name={row.name}/></TableCell>
+            </TableRow>            
+          ))}
 
           </TableBody>
         </Table>

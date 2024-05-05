@@ -1,0 +1,11 @@
+create view
+  public.tx as
+select
+  user28.name,
+  tx28.code,
+  tx28.created_at,
+  tx28.amount,
+  tx28.id
+from
+  user28
+  left join tx28 on user28.code = tx28.code;

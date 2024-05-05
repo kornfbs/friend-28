@@ -1,4 +1,4 @@
-import GridOption from "@/components/mycomponents/grid_option";
+import GridOption from "@/components/my/grid_option";
 const css = ['bg-blue-100 col-span-2 row-span-2', 'bg-red-100 col-span-2', 'bg-orange-100 h-64 col-span-2'];
 
 export default async function Index() {

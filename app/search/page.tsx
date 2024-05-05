@@ -10,6 +10,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { getTx28 } from "@/actions/user";
 
 type Props = {
     searchParams: {
@@ -17,21 +18,32 @@ type Props = {
     }
 }
 
+type Rows = {
+    code: string;
+    created_at: string;
+    amount: number;
+}
+
+export const revalidate = 0;
 
 export default async function SearchPage({searchParams: { q }}: Props) {
+    // await getTx28(q);
     const { data:rows, error } = await supabase.from('tx28').select().eq('code', q);
+
     if(!rows) {
         notFound();
     }
-    console.log(rows);
 
   return (
-    <div className='p-3'><Table>
+    <div className='p-3'>
+        			<p className="text-xl mb-3">List for {q}</p>
+
+        <Table>
     <TableHeader>
         <TableRow>
             <TableHead>Row</TableHead>
-            <TableHead className="text-center">Code</TableHead>
-            <TableHead className='text-center'>Date</TableHead>
+            <TableHead className="text-left">Insert Date</TableHead>
+            <TableHead className='text-left'>Transfer Date</TableHead>
             <TableHead className="text-center">Amount</TableHead>
 
         </TableRow>
@@ -39,10 +51,10 @@ export default async function SearchPage({searchParams: { q }}: Props) {
     <TableBody>
         {rows.map((row, index) => (
             <TableRow key={row.created_at}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell className="text-center">{(row.code).toLocaleString()}</TableCell>
-                <TableHead className='text-center'>{dateFormat(row.created_at, 'yyyy-mm-dd MM:HH')}</TableHead>
-                <TableCell className="text-right">{(row.amount).toLocaleString()}</TableCell>
+                <TableCell className="text-left text-sm font-light">{index + 1}</TableCell>
+                <TableCell className="text-left text-sm font-light">{dateFormat(row.created_at, 'yyyy-mm-dd MM:HH')}</TableCell>
+                <TableCell className="text-left text-sm font-light">{dateFormat(row.transfered_at, 'yyyy-mm-dd MM:HH')}</TableCell>
+                <TableCell className="text-right text-sm font-light">{(row.amount).toLocaleString()}</TableCell>
             </TableRow>
 
         ))}
