@@ -1,9 +1,9 @@
 'use server'
 
-import { supabase } from "@/utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
 import { z } from 'zod';
 import { v4 as uuidv4 } from 'uuid';
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 const MAX_FILE_SIZE = 5000000;
@@ -15,7 +15,7 @@ const ACCEPTED_IMAGE_TYPES = [
 ];
 
 export async function register(prevState: any, formData: FormData) {
-
+    const supabase = createClient();
     const name = formData.get('name');
     const code = formData.get('code');
 
@@ -28,10 +28,12 @@ export async function register(prevState: any, formData: FormData) {
 }
 
 export async function updateSlipt(prevState: any, formData: FormData) {
-    console.log(formData.get('code'));
-    console.log(formData.get('transferDate'));
-    console.log(formData.get('amount'));
-    console.log(formData.get('remark'));
+    const supabase = createClient();
+
+    // console.log(formData.get('code'));
+    // console.log(formData.get('transferDate'));
+    // console.log(formData.get('amount'));
+    // console.log(formData.get('remark'));
 
     const schema = z.object({
         remark: z.string(),
@@ -105,22 +107,28 @@ export async function updateSlipt(prevState: any, formData: FormData) {
 }
 
 export async function deleteTx(id: number) {
+    const supabase = createClient();
+
     await supabase.from('tx28').delete().eq('id', id);
     redirect('/admin/tx/list');
 }
 
 export async function deleteUser(id: number) {
+    const supabase = createClient();
+
     await supabase.from('user28').delete().eq('id', id);
 }
 
 export async function getTx() {
+    const supabase = createClient();
+
 
     const tx = await supabase.from('tx').select('*');
     return tx;
 }
 
 export async function getTx28(id: string) {
-
+    const supabase = createClient();
     const tx28 = await supabase.from('tx28').select('*').eq('code', id);
     return tx28;
 }
