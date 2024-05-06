@@ -9,8 +9,7 @@ import ConfirmDialog from './confirm_dialog';
 
 function DeleteUser({ id, name }: { id: number, name:string }) {
     const confirm = () => {
-        // deleteUser(id);
-        alert(id);
+        deleteUser(id);
     }
 
     return (
