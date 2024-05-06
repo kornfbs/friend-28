@@ -81,7 +81,7 @@ function UploadSliptComponent({ users }: { users: User28[] }) {
 				<input type="text" name="code" onChange={onChange} value={selectedUser?.code ?? ''} hidden />
 
 				{/* // search and result */}
-				<div className='flex justify-between items-center gap-3 mb-4'>
+				<div className='flex justify-between items-center gap-3 mb-4 md:w-1/2 lg:w-1/2'>
 					<div className='relative'>
 						<label className="mb-2 text-[16px] font-light">Search...</label>
 						<input ref={inputRef} type="text" onChange={onSearchChange} className='w-full px-2 py-1 rounded-md border-none outline-none' name="search" />
@@ -102,7 +102,7 @@ function UploadSliptComponent({ users }: { users: User28[] }) {
 				</div>
 
 				{/* //date and amount */}
-				<div className='flex justify-between items-start gap-3 mb-4'>
+				<div className='flex justify-between md:flex-col items-start gap-3 mb-4 md:w-1/3 lg:w-1/4'>
 					<div>
 						<label htmlFor="amount"><span className="mb-2 mr-2 text-[16px] font-light">วันที่โอน</span></label>
 						<Popover>
@@ -136,7 +136,7 @@ function UploadSliptComponent({ users }: { users: User28[] }) {
 				</div>
 
 				{/* //text area - remark */}
-				<div className='flex flex-col'>
+				<div className='flex flex-col md:w-1/2 lg:w-1/4'>
 					<label htmlFor="remark"><span className="mb-2 mr-2 text-[16px] font-light">หมายเหตุ</span></label>
 					<textarea rows={5} className="px-2 py-2 rounded-md border-none outline-none mb-3" name="remark" />
 				</div>

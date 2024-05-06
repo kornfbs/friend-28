@@ -9,3 +9,22 @@ select
 from
   user28
   left join tx28 on user28.code = tx28.code;
+
+  npx supabase gen types typescript --project-id "hvksgidgocdqltvbqxci" --schema public > types/supabase.ts
+
+
+  // Before 😕
+let movie: Database['public']['Tables']['movies']['Row'] = // ...
+
+// After 😍
+let movie: Tables<'movies'>
+
+const {count, error} = await supabase.from('user28').select('*', { count: 'exact'})
+const {data, count, error} = await supabase.from('user28').select('*', { count: 'exact', header: true})
+
+
+select p.*
+from players p
+where p.age = (select max(p2.age) from players p2 where p2.team = p.team);
+
+SELECT ID, NAME, SUM(AMOUNT) AS TOTAL_AMOUNT  FROM TBL_NAME GROUP BY ID

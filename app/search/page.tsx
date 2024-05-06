@@ -26,40 +26,44 @@ type Rows = {
 
 export const revalidate = 0;
 
-export default async function SearchPage({searchParams: { q }}: Props) {
+export default async function SearchPage({ searchParams: { q } }: Props) {
     // await getTx28(q);
-    const { data:rows, error } = await supabase.from('tx28').select().eq('code', q);
+    const { data: rows, error } = await supabase.from('tx28').select().eq('code', q);
 
-    if(!rows) {
+    if (!rows) {
         notFound();
     }
 
-  return (
-    <div className='p-3'>
-        			<p className="text-xl mb-3">List for {q}</p>
+    const sum = rows.reduce((acc, curr) => acc += curr.amount, 0);
 
-        <Table>
-    <TableHeader>
-        <TableRow>
-            <TableHead>Row</TableHead>
-            <TableHead className="text-left">Insert Date</TableHead>
-            <TableHead className='text-left'>Transfer Date</TableHead>
-            <TableHead className="text-center">Amount</TableHead>
+    return (
+        <div className='p-3'>
+            <p className="text-xl mb-3">List for {q}</p>
 
-        </TableRow>
-    </TableHeader>
-    <TableBody>
-        {rows.map((row, index) => (
-            <TableRow key={row.created_at}>
-                <TableCell className="text-left text-sm font-light">{index + 1}</TableCell>
-                <TableCell className="text-left text-sm font-light">{dateFormat(row.created_at, 'yyyy-mm-dd MM:HH')}</TableCell>
-                <TableCell className="text-left text-sm font-light">{dateFormat(row.transfered_at, 'yyyy-mm-dd MM:HH')}</TableCell>
-                <TableCell className="text-right text-sm font-light">{(row.amount).toLocaleString()}</TableCell>
-            </TableRow>
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>Row</TableHead>
+                        <TableHead className='text-left'>Transfer Date</TableHead>
+                        <TableHead className="text-center">Amount</TableHead>
 
-        ))}
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {rows.map((row, index) => (
+                        <TableRow key={row.created_at}>
+                            <TableCell className="text-left text-sm font-light">{index + 1}</TableCell>
+                            <TableCell className="text-left text-sm font-light">{dateFormat(row.created_at, 'yyyy-mm-dd HH:MM')}</TableCell>
+                            <TableCell className="text-right text-sm font-light">{(row.amount).toLocaleString()}</TableCell>
+                        </TableRow>
 
-    </TableBody>
-</Table>
-</div>  )
+                    ))}
+                    <TableRow key={`sum-${sum}`}>
+                        <TableCell className="text-left text-sm font-light"></TableCell>
+                        <TableCell className="text-left text-sm font-light">รวม</TableCell>
+                        <TableCell className="text-right">{(sum).toLocaleString()}</TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </div>)
 }

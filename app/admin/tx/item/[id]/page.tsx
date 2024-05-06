@@ -1,5 +1,5 @@
 import TxItemComponent from '@/components/my/tx_item';
-import { createClient, supabase } from '@/utils/supabase/client';
+import { supabase } from '@/utils/supabase/client';
 import { notFound } from 'next/navigation';
 import React from 'react'
 type Props = {

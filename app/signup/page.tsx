@@ -26,7 +26,7 @@ export default async function Signup() {
           <TableHeader>
             <TableRow>
               <TableHead>ลำดับที่</TableHead>
-              <TableHead className="text-left">เลชประจำตัว</TableHead>
+              <TableHead className="text-left">เลขประจำตัว</TableHead>
               <TableHead className="text-left flex-1">ชื่อ สกุล</TableHead>
               <TableHead className="text-left">ลบ</TableHead>
 
