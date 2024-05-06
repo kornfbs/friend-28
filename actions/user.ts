@@ -117,6 +117,8 @@ export async function deleteUser(id: number) {
     const supabase = createClient();
 
     await supabase.from('user28').delete().eq('id', id);
+    revalidatePath('/signup');
+
 }
 
 export async function getTx() {
