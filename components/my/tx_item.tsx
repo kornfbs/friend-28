@@ -2,10 +2,9 @@
 
 import { deleteTx } from "@/actions/user";
 import { imageUrl } from "@/lib/constant";
-import dateFormat from "dateformat";
 import Image from "next/image";
-import { CircleX } from 'lucide-react';
 import { useState } from "react";
+import { format } from "date-fns";
 
 function TxItemComponent({ tx }: { tx: Tx}) {
     const [open, setOpen] = useState(false);
@@ -26,7 +25,7 @@ function TxItemComponent({ tx }: { tx: Tx}) {
                 />
             </div>
             <div className="mt-3 flex gap-3"><span className="text-md font-light bg-white rounded-md px-2 py-1">{tx.code} {tx.name}</span> </div>
-            <div className="mt-3 flex gap-3"><span className="text-md font-light bg-white rounded-md px-2 py-1">{dateFormat(tx.created_at!, 'yyyy-mm-dd HH:MM')} </span><span className="text-md font-light bg-white rounded-md px-2 py-1">{(tx.amount!).toLocaleString()}</span></div>
+            <div className="mt-3 flex gap-3"><span className="text-md font-light bg-white rounded-md px-2 py-1">{format(tx.created_at!, 'y-MM-dd HH:mm')} </span><span className="text-md font-light bg-white rounded-md px-2 py-1">{(tx.amount!).toLocaleString()}</span></div>
 
             <div className="flex justify-end mb-3 mr-2">
                 <button onClick={() => setOpen(true)} className="bg-orange-600 text-white p-2 border-none outline-none rounded-sm" type="submit">Delete</button>

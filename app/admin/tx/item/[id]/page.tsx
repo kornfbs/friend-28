@@ -15,10 +15,6 @@ async function TxItem({params}: Props) {
     if(!tx){
        notFound();
     }
-    console.log(tx);
-    if(error){
-        console.log(error);
-    }
 
   return (
     <div><TxItemComponent tx={tx}/></div>

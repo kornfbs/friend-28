@@ -10,12 +10,16 @@ import {
 } from "@/components/ui/table"
 import { supabase } from "@/utils/supabase/client";
 import DeleteUser from "@/components/my/delete_user";
+import { notFound } from "next/navigation";
 
 export const revalidate = 0;
 
 export default async function Signup() {
 
   const { data: rows, error } = await supabase.from('user28').select();
+  if(!rows){
+    notFound();
+  }
 
   return (
     <div className="m-3" >
@@ -25,10 +29,10 @@ export default async function Signup() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>ลำดับที่</TableHead>
-              <TableHead className="text-left">เลขประจำตัว</TableHead>
-              <TableHead className="text-left flex-1">ชื่อ สกุล</TableHead>
-              <TableHead className="text-left">ลบ</TableHead>
+              <TableHead  className="text-left text-white">ลำดับที่</TableHead>
+              <TableHead className="text-left text-white">เลขประจำตัว</TableHead>
+              <TableHead className="text-left text-white flex-1">ชื่อ สกุล</TableHead>
+              <TableHead className="text-left text-white">ลบ</TableHead>
 
             </TableRow>
           </TableHeader>

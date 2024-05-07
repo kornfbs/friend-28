@@ -1,7 +1,6 @@
 import "./globals.css";
 import { Kanit } from "next/font/google";
 import { cn } from "@/lib/utils"
-import Header from "@/components/my/header";
 
 const kanit = Kanit({
   subsets: ['thai'],
@@ -30,7 +29,6 @@ export default function RootLayout({
         "min-h-screen bg-background font-kanit antialiased",
         kanit.variable
       )}>
-        <Header />
         {children}
       </body>
     </html>

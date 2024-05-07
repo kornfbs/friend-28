@@ -1,6 +1,5 @@
 import { supabase } from "@/utils/supabase/client"
 import { notFound } from "next/navigation";
-import dateFormat from "dateformat";
 import {
     Table,
     TableBody,
@@ -11,6 +10,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { getTx28 } from "@/actions/user";
+import { format } from "date-fns";
 
 type Props = {
     searchParams: {
@@ -53,7 +53,7 @@ export default async function SearchPage({ searchParams: { q } }: Props) {
                     {rows.map((row, index) => (
                         <TableRow key={row.created_at}>
                             <TableCell className="text-left text-sm font-light">{index + 1}</TableCell>
-                            <TableCell className="text-left text-sm font-light">{dateFormat(row.created_at, 'yyyy-mm-dd HH:MM')}</TableCell>
+                            <TableCell className="text-left text-sm font-light">{format(row.created_at, 'y-MM-dd HH:mm')}</TableCell>
                             <TableCell className="text-right text-sm font-light">{(row.amount).toLocaleString()}</TableCell>
                         </TableRow>
 

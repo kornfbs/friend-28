@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { v4 as uuidv4 } from 'uuid';
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { DateRange } from "react-day-picker";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -131,7 +132,31 @@ export async function getTx() {
 
 export async function getTx28(id: string) {
     const supabase = createClient();
-    const tx28 = await supabase.from('tx28').select('*').eq('code', id);
-    return tx28;
+    const {data, error} = await supabase.from('tx28').select('*').eq('code', id).returns<Tx28[]>();
+    if(data){
+        return data;
+    }else{
+        return [];
+    }
+}
+
+export async function getTxRange(range: DateRange) {
+    const from = range.from?.toISOString();
+    const to = range.to?.toISOString();
+    const supabase = createClient();
+    const {data, error } = await supabase.from('tx').select().lte('transfered_at', to)
+    .gte("transfered_at", from).returns<Tx[]>();
+
+    if(data){
+        return data;
+    }else{
+        return [];
+    }
+}
+
+export async function getUser28(id: string) {
+    const supabase = createClient();
+    return await supabase.from('user28').select('*');
+
 }
 

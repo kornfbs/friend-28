@@ -22,12 +22,7 @@ const InitApiReturn: ApiReturn = {
 	errors: null,
 };
 
-type User28 = {
-	id: number;
-	created_at: string;
-	code: string;
-	name: string;
-}
+
 
 
 function UploadSliptComponent({ users }: { users: User28[] }) {

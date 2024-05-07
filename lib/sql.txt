@@ -28,3 +28,5 @@ from players p
 where p.age = (select max(p2.age) from players p2 where p2.team = p.team);
 
 SELECT ID, NAME, SUM(AMOUNT) AS TOTAL_AMOUNT  FROM TBL_NAME GROUP BY ID
+
+https://supabase.com/docs/guides/auth/server-side/nextjs?router=pages

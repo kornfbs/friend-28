@@ -1,9 +1,7 @@
 import { supabase } from "@/utils/supabase/client"
-import dateFormat from "dateformat";
 import {
 	Table,
 	TableBody,
-	TableCaption,
 	TableCell,
 	TableHead,
 	TableHeader,
@@ -11,9 +9,9 @@ import {
 } from "@/components/ui/table"
 
 import DeleteTx from "@/components/my/delete_tx";
-import { getTx } from "@/actions/user";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { format } from "date-fns";
 
 // export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -67,8 +65,8 @@ export default async function TxList() {
 						<TableRow key={row.id} >
 							<TableCell className="w-[30px] text-left text-sm font-light">{index + 1}</TableCell>
 							<TableCell className="text-left text-sm font-light">{row.name!}</TableCell>
-							<TableCell className="text-left text-sm font-light">{dateFormat(row.created_at!, 'yyyy-mm-dd HH:MM')}</TableCell>
-							<TableCell className="text-left text-sm font-light">{dateFormat(row.transfered_at!, 'yyyy-mm-dd HH:MM')}</TableCell>
+							<TableCell className="text-left text-sm font-light">{format(row.created_at!, 'y-MM-dd HH:mm')}</TableCell>
+							<TableCell className="text-left text-sm font-light">{format(row.transfered_at!, 'y-MM-dd HH:mm')}</TableCell>
 
 							<TableCell className="text-right text-sm font-light">
 								<Link href={`/admin/tx/item/${row.id}`} className="bg-blue-400 rounded-lg px-2">{(row.amount!).toLocaleString()}</Link></TableCell>
