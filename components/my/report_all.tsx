@@ -20,17 +20,19 @@ import {
 } from "@/components/ui/table";
 
 type Props = {
+  calc: number;
+  allTx: Tx[];
   getRange: (args0: DateRange) => Promise<Tx[]>;
 }
 
-function ReportAllComponent({ getRange }: Props) {
+function ReportAllComponent({ getRange, calc, allTx }: Props) {
 
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(2024, 4, 1),
     to: addDays(new Date(2024, 5, 1), 30),
   });
-  const [returnTxs, setReturnTxs] = useState<Tx[] | null>(null);
-  const [sum, setSum] = useState(0);
+  const [returnTxs, setReturnTxs] = useState<Tx[]>(allTx);
+  const [sum, setSum] = useState(calc);
 
   const okSearch = async () => {
     if(date?.from == null || date?.to == null) return

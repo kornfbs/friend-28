@@ -80,7 +80,7 @@ function SingleReportComponent({ users, select }: Props) {
 							{returnTxs.map((row, index) => (
 								<TableRow key={row.created_at}>
 									<TableCell className="text-left text-sm font-light">{index + 1}</TableCell>
-									<TableCell className="text-left text-sm font-light">{format(row.transfered_at!, 'y-MM-dd HH:mm')}</TableCell>
+									<TableCell className="text-left text-sm font-light">{format(row.transfered_at!, 'y-MM-dd')}</TableCell>
 									<TableCell className="text-right text-sm font-light">{(row.amount).toLocaleString()}</TableCell>
 								</TableRow>
 

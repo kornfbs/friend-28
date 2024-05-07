@@ -6,11 +6,12 @@ import { DateRange } from "react-day-picker";
 
 
 async function ReportAll() {
-    // const { data, error } = await supabase.from('tx').select().returns<Tx28[]>();
-    // if (!data) {
-    //     notFound();
-    // }
+    const { data, error } = await supabase.from('tx').select().returns<Tx[]>();
+    if (!data) {
+        notFound();
+    }
    
+    const calc = data.reduce((acc, curr) => acc += curr.amount!, 0);
 
 
     const getRange = async (range: DateRange) => {
@@ -33,7 +34,7 @@ async function ReportAll() {
 
 
     return (
-        <ReportAllComponent getRange={getRange} />
+        <ReportAllComponent allTx={data} calc={calc} getRange={getRange} />
     )
 }
 
