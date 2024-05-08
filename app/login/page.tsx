@@ -33,7 +33,10 @@ export default function LoginPage(this: any) {
 		await supabase.auth.signInWithOAuth({
 			provider,
 			options: {
-				redirectTo: `${location.origin}/auth/callback`,
+				redirectTo: `https://*-friend-28.vercel.app/**`,
+				// redirectTo: `${location.origin}/auth/callback`,
+
+				
 			}
 		})
 	
