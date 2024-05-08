@@ -58,12 +58,15 @@ export async function updateSession(request: NextRequest) {
 
   const user = await supabase.auth.getUser();
   console.log(user.data.user?.email);
-  // const isAdmin = user.error ? false : user.data.user?.email == 'padungsak.rvsd@gmail.com' ? true : false;
-  const isAdmin = user.error ? false : user.data.user?.email == 'kornfbs@gmail.com' ? true : false;
-console.log('is admin: ', isAdmin);
+  const isAdmin = user.error ? false : user.data.user?.email == 'padungsak.rvsd@gmail.com' ? true : false;
+  // const isAdmin = user.error ? false : user.data.user?.email == 'kornfbs@gmail.com' ? true : false;
+  console.log('is admin: ', isAdmin);
   if (request.nextUrl.pathname.startsWith('/admin') && !isAdmin) {
+    await supabase.auth.getUser();
     return NextResponse.redirect(new URL('/', request.url))
   }
+
+  await supabase.auth.getUser();
 
 
   return response

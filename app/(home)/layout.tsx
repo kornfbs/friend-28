@@ -1,3 +1,4 @@
+import Header from "@/components/my/header";
 import PublicHeader from "@/components/my/public_header";
 
 
