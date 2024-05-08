@@ -39,7 +39,7 @@ export default async function Signup() {
           <TableBody>
             {rows?.map((row, index) => (
               <TableRow key={row.id}>
-                <TableCell className="font-light">{index + 1}</TableCell>
+                <TableCell className="font-light">{rows.length - index}</TableCell>
                 <TableCell className="text-left font-light">{row.code}</TableCell>
                 <TableCell className="text-left font-light flex-1">{row.name}</TableCell>
                 <TableCell className="text-left"><DeleteUser id={row.id} name={row.name}/></TableCell>

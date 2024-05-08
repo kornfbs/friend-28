@@ -111,7 +111,7 @@ function ReportAllComponent({ getRange, calc, allTx }: Props) {
               </TableRow>
               {returnTxs.map((row, index) => (
                 <TableRow key={row.id} >
-                  <TableCell className="w-[30px] text-left text-sm font-light">{index + 1}</TableCell>
+                  <TableCell className="w-[30px] text-left text-sm font-light">{returnTxs.length - index}</TableCell>
                   <TableCell className="text-left text-sm font-light">{row.name!}</TableCell>
                   <TableCell className="text-left text-sm font-light">{format(row.transfered_at!, 'y-MM-dd')}</TableCell>
                   <TableCell className="text-right text-sm font-light">{(row.amount!).toLocaleString()}</TableCell>

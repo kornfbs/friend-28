@@ -7,7 +7,7 @@ import { DateRange } from "react-day-picker";
 export const revalidate = 0;
 
 async function ReportAll() {
-    const { data, error } = await supabase.from('tx').select().order('transfered_at', { ascending: false }).returns<Tx[]>();
+    const { data, error } = await supabase.from('tx').select().order('created_at', { ascending: false }).returns<Tx[]>();
     if (!data) {
         notFound();
     }
@@ -21,7 +21,7 @@ async function ReportAll() {
         const to = range.to?.toISOString();
         const supabase = createClient();
         const {data, error } = await supabase.from('tx').select().lte('transfered_at', to)
-        .gte("transfered_at", from).order('transfered_at', { ascending: false }).returns<Tx[]>();
+        .gte("transfered_at", from).order('created_at', { ascending: false }).returns<Tx[]>();
         if(data){
             return data;
         }else{
