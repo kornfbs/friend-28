@@ -103,7 +103,7 @@ export async function updateSlipt(prevState: any, formData: FormData) {
         };
     }
 
-    redirect(`/search?q=${code}`);
+    redirect(`/admin/search?q=${code}`);
 
 }
 

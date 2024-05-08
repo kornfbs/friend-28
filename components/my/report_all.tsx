@@ -102,6 +102,13 @@ function ReportAllComponent({ getRange, calc, allTx }: Props) {
               </TableRow>
             </TableHeader>
             <TableBody>
+            <TableRow >
+                <TableCell className="w-[30px] text-left text-sm font-light"></TableCell>
+                <TableCell className="text-left text-sm font-light"></TableCell>
+                <TableCell className="text-left">รวมยอด</TableCell>
+                <TableCell className="text-right"> {(sum).toLocaleString()}
+                </TableCell>
+              </TableRow>
               {returnTxs.map((row, index) => (
                 <TableRow key={row.id} >
                   <TableCell className="w-[30px] text-left text-sm font-light">{index + 1}</TableCell>
@@ -110,10 +117,10 @@ function ReportAllComponent({ getRange, calc, allTx }: Props) {
                   <TableCell className="text-right text-sm font-light">{(row.amount!).toLocaleString()}</TableCell>
                 </TableRow>
               ))}
-              <TableRow key={`sum-${sum}`} >
+              <TableRow>
                 <TableCell className="w-[30px] text-left text-sm font-light"></TableCell>
                 <TableCell className="text-left text-sm font-light"></TableCell>
-                <TableCell className="text-left">รวม</TableCell>
+                <TableCell className="text-left">ยอดรวม</TableCell>
                 <TableCell className="text-right"> {(sum).toLocaleString()}
                 </TableCell>
               </TableRow>

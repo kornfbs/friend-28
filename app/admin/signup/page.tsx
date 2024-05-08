@@ -16,7 +16,7 @@ export const revalidate = 0;
 
 export default async function Signup() {
 
-  const { data: rows, error } = await supabase.from('user28').select();
+  const { data: rows, error } = await supabase.from('user28').select().order('id', { ascending: false });
   if(!rows){
     notFound();
   }
