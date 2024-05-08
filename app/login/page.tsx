@@ -32,9 +32,9 @@ export default function LoginPage(this: any) {
 	async function google(provider: Provider) {
 		await supabase.auth.signInWithOAuth({
 			provider,
-			options: {
-				redirectTo: `${location.origin}/auth/callback`,
-			}
+			// options: {
+			// 	redirectTo: `${location.origin}/auth/callback`,
+			// }
 		})
 	
 	}
