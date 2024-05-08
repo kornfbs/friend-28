@@ -29,7 +29,10 @@ export async function GET(request: Request) {
     )
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      return NextResponse.redirect(`${origin}`)
+      // return NextResponse.redirect(`${origin}`)
+      return NextResponse.redirect(`https://hvksgidgocdqltvbqxci.supabase.co/auth/v1/callback`);
+
+      // https://hvksgidgocdqltvbqxci.supabase.co/auth/v1/callback
     }
   }
 
