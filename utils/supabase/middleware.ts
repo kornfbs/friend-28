@@ -60,8 +60,8 @@ export async function updateSession(request: NextRequest) {
   console.log(user.data.user?.email);
   // const isAdmin = user.error ? false : user.data.user?.email == 'padungsak.rvsd@gmail.com' ? true : false;
   const isAdmin = user.error ? false : user.data.user?.email == 'kornfbs@gmail.com' ? true : false;
-
-  if (request.nextUrl.pathname.startsWith('/admin') && isAdmin) {
+console.log('is admin: ', isAdmin);
+  if (request.nextUrl.pathname.startsWith('/admin') && !isAdmin) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 

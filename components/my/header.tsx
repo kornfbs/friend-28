@@ -21,6 +21,7 @@ function Header() {
         console.log('no user')
       } else {
         setUser(data.user);
+        console.log('header ', user);
       }
     }
     getUser();
